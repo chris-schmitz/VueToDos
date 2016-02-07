@@ -104,7 +104,7 @@
         },
         methods:{
             destroyTask: function (){
-                this.$dispatch('destroyTask', this);
+                this.$dispatch('destroyTask', this.task);
             },
             toggleComplete: function (){
                 this.task.complete = !this.task.complete

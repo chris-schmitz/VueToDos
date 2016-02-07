@@ -10053,29 +10053,46 @@ if (module.hot) {(function () {  module.hot.accept()
   }
 })()}
 },{"vue":3,"vue-hot-reload-api":2,"vueify-insert-css":4}],7:[function(require,module,exports){
+var __vueify_style__ = require("vueify-insert-css").insert("/* line 3, stdin */\n.column-left {\n  float: left;\n  width: 33%; }\n\n/* line 7, stdin */\n.column-right {\n  float: right;\n  width: 33%;\n  text-align: right; }\n\n/* line 12, stdin */\n.column-center {\n  display: inline-block;\n  width: 33%;\n  text-align: center; }\n\n/* line 18, stdin */\nbutton {\n  background-color: Transparent;\n  background-repeat: no-repeat;\n  border: none;\n  color: black; }\n\n/* line 23, stdin */\n.filter-button-container button:focus {\n  outline: 0; }\n\n/* line 27, stdin */\n.filter-button-container .selected {\n  background-color: #b9ddf8;\n  border: 1px solid #5bb1f0;\n  padding: 3px;\n  -webkit-border-radius: 10%;\n  -moz-border-radius: 10%;\n  -ms-border-radius: 10%;\n  border-radius: 10%; }\n")
 'use strict';
 
 module.exports = {
+    props: {
+        activeItemCount: 'active-item-count'
+    },
     data: function data() {
         return {
-            message: 'from display control'
+            currentFilter: 'All'
         };
+    },
+    methods: {
+        changeFilterTo: function changeFilterTo(state) {
+            this.currentFilter = state;
+            this.$dispatch('filterTaskListToShow', state);
+        },
+        destroyComplete: function destroyComplete() {
+            this.$dispatch('destroyAllComplete');
+        }
     }
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n{{ message }}\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"display-control-container container\">\n\n<div class=\"column-left\"><b>{{ activeItemCount }}</b> Active Items</div>\n<div class=\"column-center filter-button-container\">\n    <button @click=\"changeFilterTo('All')\" :class=\"{ 'selected': this.currentFilter == 'All' }\">All</button>\n    <button @click=\"changeFilterTo('Active')\" :class=\"{ 'selected': this.currentFilter == 'Active' }\">Active</button>\n    <button @click=\"changeFilterTo('Complete')\" :class=\"{ 'selected': this.currentFilter == 'Complete' }\">Complete</button>\n</div>\n<div class=\"column-right\">\n    <button @click=\"destroyComplete\">Delete Complete</button>\n</div>\n</div>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   var id = "/Users/cschmitz/Development/CS/WebCode/Demos/Vue/ToDos/src/app/todos/DisplayControl.vue"
+  module.hot.dispose(function () {
+    require("vueify-insert-css").cache["/* line 3, stdin */\n.column-left {\n  float: left;\n  width: 33%; }\n\n/* line 7, stdin */\n.column-right {\n  float: right;\n  width: 33%;\n  text-align: right; }\n\n/* line 12, stdin */\n.column-center {\n  display: inline-block;\n  width: 33%;\n  text-align: center; }\n\n/* line 18, stdin */\nbutton {\n  background-color: Transparent;\n  background-repeat: no-repeat;\n  border: none;\n  color: black; }\n\n/* line 23, stdin */\n.filter-button-container button:focus {\n  outline: 0; }\n\n/* line 27, stdin */\n.filter-button-container .selected {\n  background-color: #b9ddf8;\n  border: 1px solid #5bb1f0;\n  padding: 3px;\n  -webkit-border-radius: 10%;\n  -moz-border-radius: 10%;\n  -ms-border-radius: 10%;\n  border-radius: 10%; }\n"] = false
+    document.head.removeChild(__vueify_style__)
+  })
   if (!module.hot.data) {
     hotAPI.createRecord(id, module.exports)
   } else {
     hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"vue":3,"vue-hot-reload-api":2}],8:[function(require,module,exports){
+},{"vue":3,"vue-hot-reload-api":2,"vueify-insert-css":4}],8:[function(require,module,exports){
 var __vueify_style__ = require("vueify-insert-css").insert("/* line 5, stdin */\n.cs-task {\n  background-color: #b9ddf8;\n  color: #353538;\n  border: 1px solid #5bb1f0;\n  padding: 10px;\n  width: 100%; }\n  /* line 12, stdin */\n  .cs-task .task-component {\n    display: inline-block;\n    font-size: 15pt; }\n  /* line 18, stdin */\n  .cs-task .task-title {\n    margin-left: 10px; }\n  /* line 22, stdin */\n  .cs-task .invisible-button {\n    background-color: Transparent;\n    background-repeat: no-repeat;\n    border: none;\n    color: 0;\n    background-color: Transparent;\n    background-repeat: no-repeat;\n    border: none;\n    color: #5bb1f0; }\n  /* line 30, stdin */\n  .cs-task .task-completed {\n    text-decoration: line-through;\n    color: #bebebe; }\n  /* line 35, stdin */\n  .cs-task .complete-state-icon {\n    color: #b1b1b1; }\n  /* line 39, stdin */\n  .cs-task .delete-button {\n    color: red; }\n")
 'use strict';
 
@@ -10089,7 +10106,7 @@ module.exports = {
     },
     methods: {
         destroyTask: function destroyTask() {
-            this.$dispatch('destroyTask', this);
+            this.$dispatch('destroyTask', this.task);
         },
         toggleComplete: function toggleComplete() {
             this.task.complete = !this.task.complete;
@@ -10126,7 +10143,7 @@ if (module.hot) {(function () {  module.hot.accept()
   }
 })()}
 },{"vue":3,"vue-hot-reload-api":2,"vueify-insert-css":4}],9:[function(require,module,exports){
-var __vueify_style__ = require("vueify-insert-css").insert("/* line 4, stdin */\n.cs-todo {\n  background-color: #8ac7f4;\n  width: 80%;\n  height: 80%; }\n")
+var __vueify_style__ = require("vueify-insert-css").insert("/* line 4, stdin */\n.cs-todo {\n  background-color: #8ac7f4;\n  width: 80%; }\n")
 'use strict';
 
 var displayControl = require('./DisplayControl.vue');
@@ -10141,13 +10158,22 @@ module.exports = {
     },
     data: function data() {
         return {
-            message: 'From ToDo App Base',
+            activeFilter: 'All',
             tasks: [{ id: 1, title: 'Walk the dog', complete: false }, { id: 2, title: 'Putting away the groceries', complete: false }, { id: 3, title: 'write some javascript', complete: true }]
         };
     },
+    computed: {
+        activeItemCount: function activeItemCount() {
+            return this.tasks.reduce(function (carry, current) {
+                return carry + (current.complete !== true ? 1 : 0);
+            }, 0);
+        }
+    },
     events: {
         addTask: 'onAddTask',
-        destroyTask: 'onDestroyTask'
+        destroyTask: 'onDestroyTask',
+        filterTaskListToShow: 'onFilterTaskListToShow',
+        destroyAllComplete: 'onDestroyAllComplete'
     },
     methods: {
         onAddTask: function onAddTask(task) {
@@ -10155,29 +10181,51 @@ module.exports = {
             var newTask = { id: id, title: task, complete: false };
             this.tasks.push(newTask);
         },
-        onDestroyTask: function onDestroyTask(taskModel) {
+        onDestroyTask: function onDestroyTask(task) {
             // note we're handling this hear instead of in the task
             // component because we want to remove it from the full array
             // contained in this instance. i.e. any adding or removing
             // to/from teh array should happen in the instance where the
             // array is.
-            this.tasks.$remove(taskModel.task);
+            this.tasks.$remove(task);
         },
         getNextId: function getNextId() {
             var lastTask = this.tasks[this.tasks.length - 1];
             return lastTask !== undefined ? lastTask.id + 1 : 1;
+        },
+        onFilterTaskListToShow: function onFilterTaskListToShow(state) {
+            this.activeFilter = state;
+        },
+        filterTasksBySelectedState: function filterTasksBySelectedState(task, index, tasks) {
+            if (this.activeFilter === 'All') {
+                return true;
+            } else if (this.activeFilter === 'Active') {
+                return task.complete !== true;
+            } else if (this.activeFilter === 'Complete') {
+                return task.complete === true;
+            }
+        },
+        onDestroyAllComplete: function onDestroyAllComplete() {
+            var activeTasks = this.tasks.map(function (task) {
+                if (task.complete !== true) {
+                    return task;
+                }
+            }, this).filter(function (task) {
+                return task !== undefined;
+            });
+            this.tasks = activeTasks;
         }
     }
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"cs-todo panel panel-primary\">\n    <div class=\"panel-heading\">\n        <h2>ToDos</h2>\n    </div>\n    <!-- note we're not using panel-body here intensionally -->\n    <div>\n        <cs-adds-new-tasks></cs-adds-new-tasks>\n        <div class=\"\" v-for=\"task in tasks\">\n            <cs-task :task=\"task\"></cs-task>\n        </div>\n    </div>\n    <div class=\"panel-footer\">\n        <cs-display-control></cs-display-control>\n    </div>\n</div>\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"cs-todo panel panel-primary\">\n    <div class=\"panel-heading\">\n        <h2>ToDos</h2>\n    </div>\n    <!-- note we're not using panel-body here intensionally -->\n    <div>\n        <cs-adds-new-tasks></cs-adds-new-tasks>\n        <div class=\"\" v-for=\"task in tasks | filterBy filterTasksBySelectedState\">\n            <cs-task :task=\"task\"></cs-task>\n        </div>\n    </div>\n    <div class=\"panel-footer\">\n        <cs-display-control :active-item-count=\"activeItemCount\"></cs-display-control>\n    </div>\n</div>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   var id = "/Users/cschmitz/Development/CS/WebCode/Demos/Vue/ToDos/src/app/todos/ToDoApp.vue"
   module.hot.dispose(function () {
-    require("vueify-insert-css").cache["/* line 4, stdin */\n.cs-todo {\n  background-color: #8ac7f4;\n  width: 80%;\n  height: 80%; }\n"] = false
+    require("vueify-insert-css").cache["/* line 4, stdin */\n.cs-todo {\n  background-color: #8ac7f4;\n  width: 80%; }\n"] = false
     document.head.removeChild(__vueify_style__)
   })
   if (!module.hot.data) {
