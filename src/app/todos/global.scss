@@ -5,3 +5,16 @@ $base-color-lighter: lighten($base-color, 10%);
 $text-color:#353538;
 $text-color-darker: darken($text-color, 10%);
 $text-color-lighter: lighten($text-color, 10%);
+
+@mixin invisible-button($color){
+    background-color: Transparent;
+    background-repeat: no-repeat;
+    border: none;
+    color: $color;
+}
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}

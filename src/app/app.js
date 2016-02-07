@@ -5,7 +5,5 @@ new Vue({
     el: 'body',
     components:{
         'cs-todo': ToDoApp
-    },
-    data: {
     }
 });

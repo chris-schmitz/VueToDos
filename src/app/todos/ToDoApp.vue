@@ -44,17 +44,25 @@
                     {id: 2, title: 'Putting away the groceries', complete: false },
                     {id: 3, title: 'write some javascript', complete: true },
                 ]
-
             }
         },
         events:{
-            addTask: 'onAddTask'
+            addTask: 'onAddTask',
+            destroyTask: 'onDestroyTask'
         },
         methods:{
             onAddTask: function (task){
                 var id = this.getNextId();
                 var newTask = {id: id, title: task, complete: false};
                 this.tasks.push(newTask);
+            },
+            onDestroyTask: function (taskModel){
+                // note we're handling this hear instead of in the task 
+                // component because we want to remove it from the full array
+                // contained in this instance. i.e. any adding or removing
+                // to/from teh array should happen in the instance where the
+                // array is.
+                this.tasks.$remove(taskModel.task);
             },
             getNextId: function (){
                 var lastTask = this.tasks[this.tasks.length - 1];

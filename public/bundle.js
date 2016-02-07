@@ -10014,8 +10014,6 @@ new Vue({
     el: 'body',
     components:{
         'cs-todo': ToDoApp
-    },
-    data: {
     }
 });
 
@@ -10038,7 +10036,7 @@ module.exports = {
     }
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"cs-adds-new-tasks\">\n    <div class=\"input-group\">\n        <span class=\"input-group-addon\">\n            <button class=\"fa fa-chevron-down\" @click=\"addTask\"></button>\n        </span>\n        <input name=\"newTask\" class=\"form-control\" type=\"text\" v-model=\"task\" placeholder=\"{{ placeholderText }}\">\n    </div>\n</div>\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"cs-adds-new-tasks\">\n    <div class=\"input-group\">\n        <span class=\"input-group-addon\">\n            <button class=\"fa fa-chevron-down\" @click=\"addTask\"></button>\n        </span>\n        <input name=\"newTask\" class=\"form-control\" type=\"text\" v-model=\"task\" placeholder=\"{{ placeholderText }}\" @keyup.enter=\"addTask\">\n    </div>\n</div>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -10078,21 +10076,47 @@ if (module.hot) {(function () {  module.hot.accept()
   }
 })()}
 },{"vue":3,"vue-hot-reload-api":2}],8:[function(require,module,exports){
-var __vueify_style__ = require("vueify-insert-css").insert("/* line 4, stdin */\n.cs-task {\n  background-color: #8ac7f4;\n  color: #353538;\n  border: 1px solid #5bb1f0;\n  padding: 10px; }\n")
+var __vueify_style__ = require("vueify-insert-css").insert("/* line 5, stdin */\n.cs-task {\n  background-color: #b9ddf8;\n  color: #353538;\n  border: 1px solid #5bb1f0;\n  padding: 10px;\n  width: 100%; }\n  /* line 12, stdin */\n  .cs-task .task-component {\n    display: inline-block;\n    font-size: 15pt; }\n  /* line 18, stdin */\n  .cs-task .task-title {\n    margin-left: 10px; }\n  /* line 22, stdin */\n  .cs-task .invisible-button {\n    background-color: Transparent;\n    background-repeat: no-repeat;\n    border: none;\n    color: 0;\n    background-color: Transparent;\n    background-repeat: no-repeat;\n    border: none;\n    color: #5bb1f0; }\n  /* line 30, stdin */\n  .cs-task .task-completed {\n    text-decoration: line-through;\n    color: #bebebe; }\n  /* line 35, stdin */\n  .cs-task .complete-state-icon {\n    color: #b1b1b1; }\n  /* line 39, stdin */\n  .cs-task .delete-button {\n    color: red; }\n")
 'use strict';
 
 module.exports = {
-    props: ['task']
+    props: ['task'],
+    data: function data() {
+        return {
+            taskIsBeingEdited: false,
+            originalTaskTitle: null
+        };
+    },
+    methods: {
+        destroyTask: function destroyTask() {
+            this.$dispatch('destroyTask', this);
+        },
+        toggleComplete: function toggleComplete() {
+            this.task.complete = !this.task.complete;
+        },
+        editTask: function editTask() {
+            this.originalTaskTitle = this.task.title;
+            this.taskIsBeingEdited = !this.taskIsBeingEdited;
+        },
+        cancelEdit: function cancelEdit() {
+            this.task.title = this.originalTaskTitle;
+            this.taskIsBeingEdited = !this.taskIsBeingEdited;
+        },
+        saveEdit: function saveEdit() {
+            this.originalTaskTitle = null;
+            this.taskIsBeingEdited = !this.taskIsBeingEdited;
+        }
+    }
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"cs-task\">\n    {{ task | json }}\n</div>\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"cs-task\" @dblclick=\"editTask\">\n\n    <button class=\"fa task-component invisible-button\" :class=\"{\n            'fa-circle-o':!task.complete,\n            'fa-check-circle-o':task.complete,\n            'complete-state-icon':task.complete\n        }\" @click=\"toggleComplete\" v-if=\"!taskIsBeingEdited\">\n    </button>\n\n    <div class=\"task-component task-title\">\n\n        <!-- view task section -->\n        <span :class=\"{ 'task-completed':task.complete }\" v-if=\"!taskIsBeingEdited\">\n            {{ task.title }}\n        </span>\n        <!-- / view task section -->\n\n        <!-- edit task section -->\n        <div class=\"input-group\" v-if=\"taskIsBeingEdited\">\n            <span class=\"input-group-btn\">\n                <button @click=\"cancelEdit\" type=\"button\" class=\"btn btn-danger\">Cancel</button>\n            </span>\n            <input class=\"form-control\" type=\"text\" v-model=\"task.title\">\n            <span class=\"input-group-btn\">\n                <button @click=\"saveEdit\" type=\"button\" class=\"btn btn-success\">Save</button>\n            </span>\n        </div>\n        <!-- / edit task section -->\n\n    </div>\n\n    <button class=\"fa fa-times task-component pull-right invisible-button delete-button\" @click=\"destroyTask\" v-if=\"!taskIsBeingEdited\">\n    </button>\n</div>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   var id = "/Users/cschmitz/Development/CS/WebCode/Demos/Vue/ToDos/src/app/todos/Task.vue"
   module.hot.dispose(function () {
-    require("vueify-insert-css").cache["/* line 4, stdin */\n.cs-task {\n  background-color: #8ac7f4;\n  color: #353538;\n  border: 1px solid #5bb1f0;\n  padding: 10px; }\n"] = false
+    require("vueify-insert-css").cache["/* line 5, stdin */\n.cs-task {\n  background-color: #b9ddf8;\n  color: #353538;\n  border: 1px solid #5bb1f0;\n  padding: 10px;\n  width: 100%; }\n  /* line 12, stdin */\n  .cs-task .task-component {\n    display: inline-block;\n    font-size: 15pt; }\n  /* line 18, stdin */\n  .cs-task .task-title {\n    margin-left: 10px; }\n  /* line 22, stdin */\n  .cs-task .invisible-button {\n    background-color: Transparent;\n    background-repeat: no-repeat;\n    border: none;\n    color: 0;\n    background-color: Transparent;\n    background-repeat: no-repeat;\n    border: none;\n    color: #5bb1f0; }\n  /* line 30, stdin */\n  .cs-task .task-completed {\n    text-decoration: line-through;\n    color: #bebebe; }\n  /* line 35, stdin */\n  .cs-task .complete-state-icon {\n    color: #b1b1b1; }\n  /* line 39, stdin */\n  .cs-task .delete-button {\n    color: red; }\n"] = false
     document.head.removeChild(__vueify_style__)
   })
   if (!module.hot.data) {
@@ -10119,17 +10143,25 @@ module.exports = {
         return {
             message: 'From ToDo App Base',
             tasks: [{ id: 1, title: 'Walk the dog', complete: false }, { id: 2, title: 'Putting away the groceries', complete: false }, { id: 3, title: 'write some javascript', complete: true }]
-
         };
     },
     events: {
-        addTask: 'onAddTask'
+        addTask: 'onAddTask',
+        destroyTask: 'onDestroyTask'
     },
     methods: {
         onAddTask: function onAddTask(task) {
             var id = this.getNextId();
             var newTask = { id: id, title: task, complete: false };
             this.tasks.push(newTask);
+        },
+        onDestroyTask: function onDestroyTask(taskModel) {
+            // note we're handling this hear instead of in the task
+            // component because we want to remove it from the full array
+            // contained in this instance. i.e. any adding or removing
+            // to/from teh array should happen in the instance where the
+            // array is.
+            this.tasks.$remove(taskModel.task);
         },
         getNextId: function getNextId() {
             var lastTask = this.tasks[this.tasks.length - 1];
