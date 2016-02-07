@@ -20,7 +20,14 @@
             <span class="input-group-addon">
                 <button class="fa fa-chevron-down" @click="addTask"></button>
             </span>
-            <input name="newTask" class="form-control" type="text" v-model="task" placeholder="{{ placeholderText }}">
+            <input
+                name="newTask"
+                class="form-control"
+                type="text"
+                v-model="task"
+                placeholder="{{ placeholderText }}"
+                @keyup.enter="addTask"
+            >
         </div>
     </div>
 </template>
