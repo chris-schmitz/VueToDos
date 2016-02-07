@@ -10218,7 +10218,7 @@ module.exports = {
     }
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"cs-todo panel panel-primary\">\n    <div class=\"panel-heading\">\n        <h2>ToDos</h2>\n    </div>\n    <!-- note we're not using panel-body here intensionally -->\n    <div>\n        <cs-adds-new-tasks></cs-adds-new-tasks>\n        <div class=\"\" v-for=\"task in tasks | filterBy filterTasksBySelectedState\">\n            <cs-task :task=\"task\"></cs-task>\n        </div>\n    </div>\n    <div class=\"panel-footer\">\n        <cs-display-control :active-item-count=\"activeItemCount\"></cs-display-control>\n    </div>\n</div>\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"cs-todo panel panel-primary\">\n    <div class=\"panel-heading\">\n        <h2>ToDos</h2>\n    </div>\n    <!-- note we're not using panel-body here intensionally -->\n    <div>\n        <cs-adds-new-tasks></cs-adds-new-tasks>\n        <div class=\"\" v-for=\"task in tasks | filterBy filterTasksBySelectedState | orderBy 'complete' \">\n            <cs-task :task=\"task\"></cs-task>\n        </div>\n    </div>\n    <div class=\"panel-footer\">\n        <cs-display-control :active-item-count=\"activeItemCount\"></cs-display-control>\n    </div>\n</div>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)

@@ -14,7 +14,7 @@
         <!-- note we're not using panel-body here intensionally -->
         <div>
             <cs-adds-new-tasks></cs-adds-new-tasks>
-            <div class="" v-for="task in tasks | filterBy filterTasksBySelectedState">
+            <div class="" v-for="task in tasks | filterBy filterTasksBySelectedState | orderBy 'complete' ">
                 <cs-task :task="task"></cs-task>
             </div>
         </div>
