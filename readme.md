@@ -25,20 +25,20 @@ To get this project up and running:
 - Clone the repo to your computer, open a terminal, and `cd` into the root:
 
 	    cd ~/Desktop
-	    git clone .....
-	    cd VueToDos-master
+	    git clone https://github.com/chris-schmitz/VueToDos.git VueToDos
+	    cd VueToDos
 
-- Install the project dependencies using npm:
+- Install the project dependencies using `npm` (installed when you install node):
 
 	    npm install
 
-- Start the default task in gulp:
+- Start the default task in `gulp` (installed when you run npm install):
 
     	gulp
 
 - In your terminal you should see the url for the server that this project starts:
 
-   ![](./readmeAttachments/RunningDefaultGulpTask.png)
+   ![example output of gulp command](./readmeAttachments/RunningDefaultGulpTask.png)
 
 
 Open this url in a browser and you should see the app.
