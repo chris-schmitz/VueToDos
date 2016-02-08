@@ -2,8 +2,9 @@ var gulp = require('gulp');
 var browserify = require('browserify');
 var vueify = require('vueify');
 var source = require('vinyl-source-stream');
+var connect = require('gulp-connect');
 
-gulp.task('default', ['watch']);
+gulp.task('default', ['launch-webserver','watch']);
 
 gulp.task('build-app', function (){
     return browserify('src/app/app.js')
@@ -12,6 +13,12 @@ gulp.task('build-app', function (){
         .pipe(source('bundle.js'))
         .pipe(gulp.dest('public'));
 });
+
+gulp.task('launch-webserver', function (){
+    connect.server({
+        root: ['public']
+    });
+} );
 
 gulp.task('font-awesome', ['icons', 'fonts']);
 

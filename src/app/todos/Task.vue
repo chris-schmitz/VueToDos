@@ -20,11 +20,7 @@
         }
 
         .invisible-button{
-            @include invisible-button(000000)
-            background-color: Transparent;
-            background-repeat: no-repeat;
-            border: none;
-            color: $base-color-darker;
+            @include invisible-button($base-color-darker);
         }
 
         .task-completed{

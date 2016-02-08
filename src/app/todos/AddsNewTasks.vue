@@ -6,10 +6,7 @@
         padding: 10px;
 
         button{
-            background-color: Transparent;
-            background-repeat: no-repeat;
-            border: none;
-            color: $base-color-darker;
+            @include invisible-button($base-color-darker);
         }
     }
 </style>
@@ -18,7 +15,7 @@
     <div class="cs-adds-new-tasks">
         <div class="input-group">
             <span class="input-group-addon">
-                <button class="fa fa-chevron-down" @click="addTask"></button>
+                <button class="fa fa-plus" @click="addTask"></button>
             </span>
             <input
                 name="newTask"
