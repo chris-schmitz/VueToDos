@@ -42,3 +42,10 @@ To get this project up and running:
 
 
 Open this url in a browser and you should see the app.
+
+
+## Mockup
+
+I used draw.io to create a [mockup for the demo](https://drive.google.com/file/d/0Bxhfk2Nciu7jY3N3MUFIdzJqcU0/view?usp=sharing) to help plan out the build.
+
+The mockup contains two layers aside from the wireframe; one for general notes and one for structural planning.
