@@ -34,7 +34,7 @@ To get this project up and running:
 
 - Start the default task in `gulp` (installed when you run npm install):
 
-    	gulp
+    	./node_modules/.bin/gulp
 
 - In your terminal you should see the url for the server that this project starts:
 
